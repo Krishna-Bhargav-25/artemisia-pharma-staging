@@ -37,14 +37,14 @@ function rewriteForPages(html) {
     .replace(/src="\/logo\.(png|jpg|jpeg|svg)"/g, `src="${basePath}/logo.$1"`)
     // nav + root links
     .replace(/href="\/"/g, `href="${basePath}/"`)
-.replace(/href=\"\\/about\"/g, `href=\"${basePath}/about/\"`)
-    .replace(/href=\"\\/portfolio\"/g, `href=\"${basePath}/products/\"`)
-    .replace(/href=\"\\/products\"/g, `href=\"${basePath}/products/\"`)
-    .replace(/href=\"\\/products\\/ir-pellets\"/g, `href=\"${basePath}/products/ir-pellets/\"`)
-    .replace(/href=\"\\/products\\/sr-cr-pr-pellets\"/g, `href=\"${basePath}/products/sr-cr-pr-pellets/\"`)
-    .replace(/href=\"\\/products\\/dr-ec-pellets\"/g, `href=\"${basePath}/products/dr-ec-pellets/\"`)
-    .replace(/href=\"\\/products\\/granules\"/g, `href=\"${basePath}/products/granules/\"`)
-    .replace(/href=\"\\/contact\"/g, `href=\"${basePath}/contact/\"`);
+    .replace(/href="\/about"/g, `href="${basePath}/about/"`)
+    .replace(/href="\/portfolio"/g, `href="${basePath}/products/"`)
+    .replace(/href="\/products"/g, `href="${basePath}/products/"`)
+    .replace(/href="\/products\/ir-pellets"/g, `href="${basePath}/products/ir-pellets/"`)
+    .replace(/href="\/products\/sr-cr-pr-pellets"/g, `href="${basePath}/products/sr-cr-pr-pellets/"`)
+    .replace(/href="\/products\/dr-ec-pellets"/g, `href="${basePath}/products/dr-ec-pellets/"`)
+    .replace(/href="\/products\/granules"/g, `href="${basePath}/products/granules/"`)
+    .replace(/href="\/contact"/g, `href="${basePath}/contact/"`);
 
   // Contact form wiring: if no external endpoint, disable the form gracefully
   if (FORM_ENDPOINT) {
