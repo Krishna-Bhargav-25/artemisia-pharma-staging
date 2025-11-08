@@ -75,8 +75,8 @@
       capsules.push({
         x: rng(0, w), y: rng(0, h),
         vx: rng(-0.004, 0.004), vy: rng(-0.022, -0.006),
-        // 50% smaller than previous config
-        len: rng(70, 130)*dpr, rad: rng(6, 10)*dpr,
+        // Reduce length by 25% and broaden radius by 20%
+        len: rng(70, 130)*0.75*dpr, rad: rng(6, 10)*1.2*dpr,
         rot: rng(0, Math.PI), vrot: rng(-0.00012, 0.00012),
         col: Math.random() < 0.5 ? COL_CAP_A : COL_CAP_B,
         alpha: rng(0.22, 0.5), depth
