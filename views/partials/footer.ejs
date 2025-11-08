@@ -1,8 +1,19 @@
-  </main>
-  <footer>
-    <div class="container">© <span id="year"></span> Artemisia Pharma. All rights reserved.</div>
-  </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
-  <script src="/app.js" defer></script>
+</main>
+<footer>
+  <div class="container">
+    © <span id="year"></span> Artemisia Pharma. All rights reserved. |
+    <a href="mailto:corporate.artemisia@arpharmalifelines.com?subject=Inquiry%20from%20Artemisia%20Pharma%20Website" class="email-link">
+      Email us
+    </a>
+  </div>
+</footer>
+
+<script>
+  // Dynamically set the current year in the footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<script src="/app.js" defer></script>
 </body>
 </html>
+
