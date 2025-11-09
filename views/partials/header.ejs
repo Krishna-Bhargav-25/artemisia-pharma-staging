@@ -8,16 +8,26 @@
 </head>
 <body>
   <div id="bg-asmr" aria-hidden="true"><canvas id="bg-asmr-canvas"></canvas></div>
+
   <header>
     <nav class="container">
       <a class="brand" href="/">
-        <img src="/logo.svg" alt="Artemisia Pharma logo" />
+        <img src="/logo.svg" alt="Artemisia Pharma logo" class="logo" />
       </a>
-      <ul>
+
+      <!-- Hamburger Menu (visible only on mobile) -->
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links">
         <li><a href="/about">About</a></li>
         <li><a href="/products">Products</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
     </nav>
   </header>
+
   <main id="page" class="container">
