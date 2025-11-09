@@ -1,11 +1,18 @@
 [build]
-  command = "node scripts/prerender.js"
+  command = "npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
+  FORM_ENDPOINT = ""  # You can leave this blank or fill it in later
 
-# Redirects all routes to index.html (for clean page refreshes)
+[dev]
+  command = "npm run dev"
+  port = 8888
+
+[functions]
+  directory = "netlify/functions"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
