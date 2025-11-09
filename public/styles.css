@@ -160,3 +160,41 @@ footer{border-top:1px solid var(--border);padding:16px 0;margin-top:48px;color:v
 @media (prefers-reduced-motion: reduce) {
   .footer-email-cta { animation: none; }
 }
+
+/* Responsive table layout */
+.product-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Make table fit screen width */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  word-wrap: break-word;
+}
+
+/* Ensure table text wraps and doesn't force horizontal scroll */
+table th, table td {
+  padding: 0.75rem;
+  text-align: left;
+  word-break: break-word;
+}
+
+/* Adjust layout for small screens */
+@media (max-width: 768px) {
+  .product-table-container {
+    padding: 0 8px;
+  }
+
+  table th, table td {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  h1, h2, h3 {
+    text-align: center;
+  }
+}
