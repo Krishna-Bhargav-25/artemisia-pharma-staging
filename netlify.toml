@@ -1,0 +1,12 @@
+[build]
+  command = "node scripts/prerender.js"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Redirects all routes to index.html (for clean page refreshes)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
