@@ -114,3 +114,49 @@ footer{border-top:1px solid var(--border);padding:16px 0;margin-top:48px;color:v
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important;transition:none!important}
 }
+
+/* === Footer Email CTA (visually prominent but brand-aligned) === */
+.footer-email-cta {
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  padding: 14px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(90deg, var(--Primary-Brand), var(--Secondary-Brand));
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  animation: subtle-pulse 5s var(--ease-standard) infinite;
+}
+
+.footer-email-cta a.email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: transform 0.25s var(--ease-standard), filter 0.25s var(--ease-standard);
+}
+
+.footer-email-cta a.email-link:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.footer-email-cta .icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Gentle pulse to subtly draw attention */
+@keyframes subtle-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(247, 197, 85, 0.25); }
+  50% { box-shadow: 0 0 24px rgba(247, 197, 85, 0.45); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-email-cta { animation: none; }
+}
