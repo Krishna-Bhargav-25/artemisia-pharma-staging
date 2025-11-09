@@ -1,9 +1,92 @@
 /*
+  Static prerender for Netlify Deployment
+  - Renders EJS views to dist/
+  - Copies public assets
+  - Automatically supports Netlify forms
+*/
+const fs = require('fs');
+const fsp = require('fs/promises');
+const path = require('path');
+const ejs = require('ejs');
+const { loadProductData, getCategories } = require('../utils/excelLoader');
+
+const root = path.join(__dirname, '..');
+const viewsDir = path.join(root, 'views');
+const distDir = path.join(root, 'dist');
+const publicDir = path.join(root, 'public');
+
+// Base path for Netlify (root)
+const basePath = '';
+const FORM_ENDPOINT = process.env.FORM_ENDPOINT || '';
+const VERSION = process.env.BUILD_VERSION || String(Date.now());
+
+const categories = getCategories();
+
+const pages = [
+  { view: 'index', out: 'index.html', data: { title: 'Artemisia Pharma' } },
+  { view: 'about', out: 'about/index.html', data: { title: 'About Us - Artemisia Pharma' } },
+  { view: 'products/index', out: 'products/index.html', data: { title: 'Products - Artemisia Pharma', categories } },
+  { view: 'products/ir-pellets', out: 'products/ir-pellets/index.html', data: { title: 'IR Pellets - Artemisia Pharma', products: loadProductData('ir-pellets') } },
+  { view: 'products/sr-cr-pr-pellets', out: 'products/sr-cr-pr-pellets/index.html', data: { title: 'SR/CR/PR Pellets - Artemisia Pharma', products: loadProductData('sr-cr-pr-pellets') } },
+  { view: 'products/dr-ec-pellets', out: 'products/dr-ec-pellets/index.html', data: { title: 'EC/DR Pellets - Artemisia Pharma', products: loadProductData('dr-ec-pellets') } },
+  { view: 'products/granules', out: 'products/granules/index.html', data: { title: 'Granules - Artemisia Pharma', products: loadProductData('granules') } },
+  { view: 'products/inert-core-pellets', out: 'products/inert-core-pellets/index.html', data: { title: 'Inert Core Pellets - Artemisia Pharma', products: loadProductData('inert-core-pellets') } },
+  { view: 'contact', out: 'contact/index.html', data: { title: 'Contact Us - Artemisia Pharma', sent: null, error: null } },
+];
+
+function rewriteForNetlify(html) {
+  let out = html
+    .replace(/href=\"\/styles\.css\"/g, `href=\"/styles.css?v=${VERSION}\"`)
+    .replace(/src=\"\/app\.js\"/g, `src=\"/app.js?v=${VERSION}\"`)
+    .replace(/src=\"\/logo\.(png|jpg|jpeg|svg)\"/g, `src=\"/logo.$1?v=${VERSION}\"`);
+
+  // Add Netlify form support
+  out = out.replace(/<form([^>]*?)>/i, `<form$1 netlify>`);
+
+  return out;
+}
+
+async function copyDir(src, dest) {
+  await fsp.mkdir(dest, { recursive: true });
+  for (const entry of await fsp.readdir(src, { withFileTypes: true })) {
+    const s = path.join(src, entry.name);
+    const d = path.join(dest, entry.name);
+    if (entry.isDirectory()) await copyDir(s, d);
+    else await fsp.copyFile(s, d);
+  }
+}
+
+(async () => {
+  await fsp.rm(distDir, { force: true, recursive: true });
+  await fsp.mkdir(distDir, { recursive: true });
+
+  // Copy all static assets to dist/
+  if (fs.existsSync(publicDir)) {
+    await copyDir(publicDir, distDir);
+    console.log('✅ Copied public assets to dist/');
+  }
+
+  // Render pages
+  for (const p of pages) {
+    const outPath = path.join(distDir, p.out);
+    await fsp.mkdir(path.dirname(outPath), { recursive: true });
+    const file = path.join(viewsDir, `${p.view}.ejs`);
+    const html = await ejs.renderFile(file, p.data, {
+      views: [viewsDir],
+      filename: file,
+    });
+    const rewritten = rewriteForNetlify(html);
+    await fsp.writeFile(outPath, rewritten, 'utf8');
+  }
+
+  console.log('✅ Static site generated in dist/ for Netlify');
+})();
+/*
   Static prerender for GitHub Pages
   - Renders EJS views to dist/
   - Rewrites absolute links/assets to include the Project Pages base path
   - Optionally wires contact form to an external endpoint via FORM_ENDPOINT env var
-*/
+
 const fs = require('fs');
 const fsp = require('fs/promises');
 const path = require('path');
@@ -107,3 +190,4 @@ async function copyDir(src, dest) {
   await fsp.writeFile(path.join(docsDir, '404.html'), redirectHtml, 'utf8');
   console.log('Static site generated in docs/');
 })();
+*/
