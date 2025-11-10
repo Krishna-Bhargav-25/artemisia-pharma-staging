@@ -511,4 +511,71 @@ footer a:hover {
   position: absolute;
   left: -9999px;
 }
+/* ---------------- Footer CTA - authoritative override ---------------- */
+.footer-email-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  margin: 20px auto 12px !important;
+  padding: 0.75rem 1.5rem !important;
+  background: linear-gradient(90deg, var(--Primary-Brand), var(--Secondary-Brand)) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 20px rgba(11,30,58,0.18) !important;
+  width: fit-content !important;
+  max-width: 94% !important;
+  z-index: 9999 !important;       /* ensure it's above other layers */
+  position: relative !important;
+  pointer-events: auto !important;/* ensure clicks reach it */
+  transform: none !important;     /* prevent hidden transform from reveal */
+  opacity: 1 !important;          /* ensure visible even if .reveal left alone */
+}
+
+/* If the CTA also uses .reveal class (common), make sure it's visible */
+.footer-email-cta.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* anchor inside CTA */
+.footer-email-cta a.email-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  text-decoration: none !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  white-space: nowrap !important; /* keep on one line on larger screens */
+}
+
+/* ensure email text is visible and wraps correctly on small screens */
+.footer-email-cta .email-text {
+  display: inline-block !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
+}
+
+/* Responsive: allow wrapping on the smallest devices */
+@media (max-width: 480px) {
+  .footer-email-cta {
+    padding: 10px 12px !important;
+    max-width: 94% !important;
+  }
+  .footer-email-cta a.email-link {
+    font-size: 13px !important;
+    gap: 8px !important;
+    white-space: normal !important; /* allow the email to wrap */
+  }
+  .footer-email-cta .email-text {
+    word-break: break-word !important;
+    white-space: normal !important;
+  }
+}
 
