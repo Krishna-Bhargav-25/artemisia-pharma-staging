@@ -52,6 +52,7 @@ const pages = [
   { view: 'products/index', out: 'products/index.html', data: { title: 'Products - Artemisia Pharma', categories } },
   ...productPages,
   { view: 'contact', out: 'contact/index.html', data: { title: 'Contact Us - Artemisia Pharma', sent: null, error: null } },
+  { view: 'thank-you', out: 'thank-you/index.html', data: { title: 'Thank You – Artemisia Pharma' } },
 ];
 
 /* -----------------------------
